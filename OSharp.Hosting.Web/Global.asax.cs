@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OSharp.Core.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -48,6 +49,8 @@ namespace MvcWebFramework
             }
 
             base.Application_Start(sender, e);
+
+            DatabaseInitializer.Initialize();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

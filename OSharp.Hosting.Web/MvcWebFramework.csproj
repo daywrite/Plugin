@@ -350,6 +350,20 @@
   <ItemGroup>
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OSharp.Core.Data.Entity\OSharp.Core.Data.Entity.csproj">
+      <Project>{cebbce70-aff3-4fcb-b875-9f7a967e2aa6}</Project>
+      <Name>OSharp.Core.Data.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OSharp.Core\OSharp.Core.csproj">
+      <Project>{befd6d74-b010-4495-8b51-9fb503d0564a}</Project>
+      <Name>OSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OSharp.Utility\OSharp.Utility.csproj">
+      <Project>{63e43a57-c873-465a-8815-4a2a07e1dd53}</Project>
+      <Name>OSharp.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
