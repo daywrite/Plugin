@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="应用中心" SymbolicName="UIShell.BootstrapAppCenterPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="UIShell.BootstrapAppCenterPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\UIShell.BootstrapAppCenterPlugin.dll" Share="false" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+    <Dependency BundleSymbolicName="UIShell.BundleManagementService" Resolution="Mandatory"/>
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="应用中心" Order="11" Icon="icon-th">
+      <Node Name="插件管理" Permission="BundleManagement" Order="8" ToolTip="插件管理" Value="~/UIShell.BootstrapAppCenterPlugin/BundleManagement/List" />
+      <Node Name="插件中心" Permission="AppCenter" Order="8" ToolTip="插件中心" Value="~/UIShell.BootstrapAppCenterPlugin/AppCenter/List" />
+    </Node>
+  </Extension>
+  <Extension Point="UIShell.PermissionService">
+    <Permission Id="BundleManagement" Name="插件管理" Description="插件状态管理权限" />
+    <Permission Id="AppCenter" Name="插件中心" Description="插件中心访问权限" />
+  </Extension>
+</Bundle>

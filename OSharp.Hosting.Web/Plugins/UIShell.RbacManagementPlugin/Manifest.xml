@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="权限管理" SymbolicName="UIShell.RbacManagementPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="UIShell.RbacManagementPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\UIShell.RbacManagementPlugin.dll" Share="false" />
+    <Dependency BundleSymbolicName="UIShell.RbacPermissionService"/>
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="用户管理" Order="11" Icon="icon-user">
+      <Node Name="角色管理" Order="1" Permission="RoleManagement" ToolTip="角色管理" Value="~/UIShell.RbacManagementPlugin/Roles/List" />
+      <Node Name="用户管理" Order="8" Permission="UserManagement" ToolTip="用户管理" Value="~/UIShell.RbacManagementPlugin/Users/List" />
+    </Node>
+  </Extension>
+  <Extension Point="UIShell.PermissionService">
+    <Permission Id="UserManagement" Name="用户管理" Description="用户增删改查权限" />
+    <Permission Id="RoleManagement" Name="角色管理" Description="角色权限管理" />
+  </Extension>
+</Bundle>

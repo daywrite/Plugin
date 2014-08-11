@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="HomePlugin" SymbolicName="HomePlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="HomePlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\HomePlugin.dll" Share="false" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="主页" Order="0.5" Icon="icon-home" ToolTip="主页" Value="~/HomePlugin/Home/Index" />
+  </Extension>
+</Bundle>

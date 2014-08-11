@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="WidgetsPlugin" SymbolicName="WidgetsPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="WidgetsPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\WidgetsPlugin.dll" Share="false" MultipleVersions="false" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="小窗口" Order="11" Icon="icon-comment" Value="~/WidgetsPlugin/Home/Index" />
+  </Extension>
+</Bundle>

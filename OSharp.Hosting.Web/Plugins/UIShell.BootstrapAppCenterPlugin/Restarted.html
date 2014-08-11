@@ -1,0 +1,44 @@
+﻿<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset =utf-8">
+    <title>关闭浏览器</title>
+
+    <style>
+        body {
+            TEXT-ALIGN: center;
+        }
+
+        .center {
+            MARGIN-RIGHT: auto;
+            MARGIN-LEFT: auto;
+            margin-top: 200px;
+            height: 200px;
+            width: 400px;
+            vertical-align: middle;
+            line-height: 40px;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div id="messageDiv" class="center"></div>
+
+    <script language="javascript">
+    function countDown(secs) {
+        if (secs < 10) {
+            document.getElementById("messageDiv").innerHTML = '<p>正在重启应用，已经完成' + (secs * 10) + '%......</p><p></p>';
+        }
+        else {
+            document.getElementById("messageDiv").innerHTML = '操作已成功，请关闭浏览器重新访问';
+        }
+
+        if (++secs <= 10)
+            setTimeout("countDown(" + secs + ")", 1000);
+    }
+
+    countDown(1);
+    </script>
+
+</body>
+</html>

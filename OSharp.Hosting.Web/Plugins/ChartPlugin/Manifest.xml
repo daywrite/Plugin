@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="ChartPlugin" SymbolicName="ChartPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="ChartPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\ChartPlugin.dll" Share="true" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="图表" Order="6" Icon="icon-bar-chart" ToolTip="图表" Value="~/ChartPlugin/Home/Index" />
+  </Extension>
+</Bundle>

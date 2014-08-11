@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "插件中心";
+}
+
+@using UIShell.OSGi
+@using UIShell.OSGi.MvcWebExtension
+@using UIShell.BootstrapAppCenterPlugin.ViewModels
+@using UIShell.iOpenWorks.BundleRepository.OpenAPI
+
+@model BundleDetailListViewModel
+
+<!-- Page title -->
+<div class="page-title">
+    <h2><i class="icon-desktop color"></i> 插件中心 <small>从插件仓库下载插件动态组装</small></h2>
+    <hr />
+</div>
+<!-- Page title -->
+<!--box-info start-->
+@using (Html.BeginForm("Install", "AppCenter", new { currentPageNum = Model.CurrentPageNum, pageSize = @Model.PageSize }, FormMethod.Post, null))
+{
+    <div class="awidget">
+        <div class="awidget-head">
+            <div class="row">
+                <div class="col-md-2">
+                    <span>插件总数：@Model.TotalCount</span>
+                </div>
+                <div class="col-md-8">
+                    <div class="progress" hidden="hidden">
+                        <div id="progressBar" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-success">
+                            <span class="sr-only">0% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary pull-right" id="InstallImageButton" name="InstallImageButton">安装插件</button>
+                </div>
+            </div>
+        </div>
+        <div class="awidget-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>插件名称</th>
+                                <th>唯一标识</th>
+                                <th>版本</th>
+                                <th>新版本</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+    foreach (BundleDetails bundle in Model.PagedModels)
+    {
+        <tr>
+            <td>
+                @Html.CheckBox(string.Format("_id_{0}_sm_{1}_ver_{2}_name_{3}_up_{4}", bundle.BundleID, bundle.SymbolicName, bundle.Version, bundle.Name, bundle.HasNewVersion), false, new { @class = "bluecheckradios" })
+            </td>
+            <td>@bundle.Name</td>
+            <td>@bundle.SymbolicName</td>
+            <td>@bundle.Version.ToString()</td>
+            <td>@bundle.NewVersionText</td>
+        </tr>
+    }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                @Html.Partial("_PagedListBottom")
+                <div id="informationArea" style="display:none; cursor: default">
+                    <div id="progressbar"></div><span></span>
+                    <div id="result" class="resultDiv"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            @if(Model.InstallInProgress)
+            {
+                @Html.Raw("queryProgress();")
+            }
+        });
+
+        var updateInterval = 500;
+
+        // Query the installation progress. It will update the progress every 0.5 second.
+        function queryProgress() {
+            disableButtons();
+
+            $(".progress").removeAttr("hidden");
+            $("#progressBar").removeAttr("style");
+            $("#progressBar").attr('style', 'width: 0%');
+
+            setTimeout(updateProgress, updateInterval);
+        }
+
+        // Query the installation progress on server side by using ajax invoking.
+        // And update the progress after invoking completed.
+        function updateProgress() {
+            $.ajax({
+                type: "POST",
+                url: "QueryProgressItem",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: onResult,
+                error: onError
+            });
+        }
+
+        // Update the progress when progress query completed.
+        function onResult(data) {
+            var percentage = 0;
+            for (var i = 0; data != null && i < data.length; i++) {
+                var progressItem = data[i];
+
+                percentage = progressItem.Percentage;
+
+                $("#progressBar").removeAttr("style");
+                $("#progressBar").attr('style', 'width: ' + percentage + '%');
+
+                if (percentage >= 100) {
+                    document.location.href = "List?currentPageNum=" + @Model.CurrentPageNum + "&pageSize=" + @Model.PageSize;
+                    break;
+                }
+            }
+            if (percentage < 100) {
+                setTimeout(updateProgress, updateInterval);
+            }
+            else {
+                enableButtons();
+            }
+        }
+
+        function onError(data) {
+            alert("Error occurs!");
+            enableButtons();
+        }
+
+        function enableButtons() {
+            $("#InstallImageButton").removeAttr("disabled");
+        }
+
+        function disableButtons() {
+            $("#InstallImageButton").attr('disabled', 'disabled');
+        }
+
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+    </script>
+}

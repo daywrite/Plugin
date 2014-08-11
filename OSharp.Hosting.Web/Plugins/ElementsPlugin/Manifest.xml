@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="ElementsPlugin" SymbolicName="ElementsPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="ElementsPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\ElementsPlugin.dll" Share="false" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="界面元素" Order="2" Icon="icon-sitemap" ToolTip="界面元素">
+      <Node Name="用户界面" Order="1" Value="~/ElementsPlugin/Home/UserInterface" />
+      <Node Name="表格" Order="2" Value="~/ElementsPlugin/Home/Tables" />
+      <Node Name="窗体" Order="3" Value="~/ElementsPlugin/Home/Form" />
+    </Node>
+  </Extension>
+</Bundle>

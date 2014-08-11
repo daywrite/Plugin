@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="DemoPlugin插件" SymbolicName="DemoPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="OSharp.Plugin.Demo.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="OSharp.Plugin.Demo.dll" Share="false" MultipleVersions="false" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="测试" Order="31" Icon="icon-flag">
+      <Node Name="联系人显示" Order="1" ToolTip="联系人显示" Permission="ViewContacts" Value="~/DemoPlugin/Home/Index" />
+    </Node>
+  </Extension>
+</Bundle>

@@ -1,0 +1,35 @@
+﻿@{
+    var actionName = ViewData["Action"] == null ? ViewContext.RouteData.Values["Action"].ToString() : ViewData["Action"].ToString();
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">@("每页 " + @Model.PageSize + " 条") <span class="caret"></span></button>
+            <ul role="menu" class="dropdown-menu">
+                @foreach (int size in Model.PageSizeList)
+                {
+                    <li>@Html.ActionLink("每页 " + @size + " 条", actionName, new { currentPageNum = Model.CurrentPageNum, pageSize = size }) </li>
+                }
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6">
+        <ul class="pagination pull-right" style="margin:0">
+            @if (Model.HasPreviousPage)
+            {
+                <li><a href="@Url.Action(actionName, new { currentPageNum = Model.CurrentPageNum - 1, pageSize = Model.PageSize })">&laquo;</a></li>
+            }
+            @for (int pageNum = 1; pageNum <= Model.PageCount; pageNum++)
+            {
+                <li><a href="@Url.Action(actionName, new { currentPageNum = pageNum, pageSize = Model.PageSize })">@pageNum</a></li>
+            }
+            @if (Model.HasNextPage)
+            {
+                <li><a href="@Url.Action(actionName, new { currentPageNum = Model.CurrentPageNum + 1, pageSize = Model.PageSize })">&raquo;</a></li>
+            }
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>

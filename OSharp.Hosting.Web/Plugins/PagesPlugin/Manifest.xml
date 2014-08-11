@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="PagesPlugin" SymbolicName="PagesPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="PagesPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\PagesPlugin.dll" Share="false" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="页面" Order="3" Icon="icon-th-list" ToolTip="页面">
+      <Node Name="Error Log" Order="1" ToolTip="Widgets" Value="~/PagesPlugin/Home/ErrorLog" />
+      <Node Name="Invoice" Order="2" ToolTip="Widgets" Value="~/PagesPlugin/Home/Invoice" />
+      <Node Name="Make Post" Order="3" ToolTip="Widgets" Value="~/PagesPlugin/Home/MakePost" />
+      <Node Name="Profile" Order="4" ToolTip="Widgets" Value="~/PagesPlugin/Home/Profile" />
+      <Node Name="Media" Order="5" ToolTip="Widgets" Value="~/PagesPlugin/Home/Media" />
+    </Node>
+  </Extension>
+</Bundle>

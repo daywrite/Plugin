@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" SymbolicName="OSharp.Plugin.Demo.Services" Name="OSharp.Plugin.Demo.Services" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="OSharp.Plugin.Demo.Services.Activator"/>
+  <Runtime>
+    <Assembly Path="bin\OSharp.Plugin.Demo.Services.dll" Share="true"/>
+  </Runtime>
+</Bundle>

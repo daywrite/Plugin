@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "插件管理";
+}
+
+@using UIShell.OSGi
+@using UIShell.OSGi.MvcWebExtension
+@using UIShell.BootstrapAppCenterPlugin.ViewModels
+@model BundleListViewModel
+
+<!-- Page title -->
+<div class="page-title">
+    <h2><i class="icon-desktop color"></i> 插件管理 <small>管理当前安装的插件</small></h2>
+    <hr />
+</div>
+<!-- Page title -->
+<div class="awidget">
+    <div class="awidget-head">
+        <div class="row">
+            <div class="col-md-10">
+                <span>插件总数：@Model.TotalCount</span>
+            </div>
+            <div class="col-md-2">
+                @if (BundleListViewModel.RestartRequired)
+                {
+                    <button id="RestartButton" name="RestartButton" class="btn btn-warning pull-right">重启系统</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="awidget-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>插件名称</th>
+                            <th>唯一标识</th>
+                            <th>版本</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (IBundle bundle in Model.PagedModels)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (BundleListViewModel.CanBeStarted(bundle))
+                                        {
+                                            <button type="button" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="启动插件" onclick="javacript:Start(@bundle.BundleID, @Model.CurrentPageNum, @Model.PageSize);">
+                                                <i class="icon-play"></i>
+                                            </button>
+                                        }
+
+                                        @if (BundleListViewModel.CanBeStopped(bundle))
+                                        {
+                                            <button type="button" class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="停止插件" onclick="javacript:Stop(@bundle.BundleID, @Model.CurrentPageNum, @Model.PageSize);">
+                                                <i class="icon-stop"></i>
+                                            </button>
+                                        }
+
+                                        @if (BundleListViewModel.CanBeUninstalled(bundle))
+                                        {
+                                            <button type="button" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="卸载插件" onclick="javacript:Uninstall(@bundle.BundleID, @Model.CurrentPageNum, @Model.PageSize);">
+                                                <i class="icon-remove"></i>
+                                            </button>
+                                        }
+
+                                    </td>
+                                    <td>@bundle.Name</td>
+                                    <td>@bundle.SymbolicName</td>
+                                    <td>@bundle.Version.ToString()</td>
+                                    <td>@BundleListViewModel.StateDict[bundle.State]</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @Html.Partial("_PagedListBottom")
+    </div>
+</div>
+
+
+
+@{
+    var relatePath = BundleActivator.Bundle.Location.Replace(AppDomain.CurrentDomain.BaseDirectory, "");
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#RestartButton").click(function () {
+                $.getJSON("@Url.Content("~/" + BundleActivator.Bundle.SymbolicName + "/BundleManagement/Restart")", null, function (data) {
+                    document.location.href = "@Url.Content("~/" + relatePath + "/Restarted.html")";
+                })
+            });
+        });
+
+        function Start(bundleId, currentPageNum, pageSize) {
+            document.location.href = "Start?bundleId=" + bundleId + "&currentPageNum=" + currentPageNum + "&pageSize=" + pageSize;
+        }
+
+        function Stop(bundleId, currentPageNum, pageSize) {
+            document.location.href = "Stop?bundleId=" + bundleId + "&currentPageNum=" + currentPageNum + "&pageSize=" + pageSize;
+        }
+
+        function Uninstall(bundleId, currentPageNum, pageSize) {
+            if (confirm("确认要卸载这个插件吗？")) {
+                document.location.href = "Uninstall?bundleId=" + bundleId + "&currentPageNum=" + currentPageNum + "&pageSize=" + pageSize;
+            }
+        }
+
+        function Restart() {
+            document.location.href = "Restart";
+        }
+    </script>
+}

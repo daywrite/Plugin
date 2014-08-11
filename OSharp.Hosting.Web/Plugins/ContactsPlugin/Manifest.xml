@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="ContactsPlugin" SymbolicName="ContactsPlugin" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="ContactsPlugin.BundleActivator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\ContactsPlugin.dll" Share="false" MultipleVersions="false" />
+    <Dependency BundleSymbolicName="UIShell.PageFlowService" Resolution="Mandatory" />
+    <Dependency BundleSymbolicName="UIShell.PermissionService" Resolution="Mandatory" />
+  </Runtime>
+  <Extension Point="UIShell.NavigationService">
+    <Node Name="演示" Order="30" Icon="icon-flag">
+      <Node Name="联系人显示" Order="1" ToolTip="联系人显示" Permission="ViewContacts" Value="~/ContactsPlugin/Contacts/Index" />
+    </Node>
+  </Extension>
+  <Extension Point="UIShell.PermissionService">
+    <Permission Id="ViewContacts" Name="查看联系人" Description="查看联系人权限" />
+    <Permission Id="AddContact" Name="添加联系人" Description="添加联系人权限" />
+    <Permission Id="EditContact" Name="编辑联系人" Description="编辑联系人权限" />
+    <Permission Id="DeleteContact" Name="删除联系人" Description="删除联系人权限" />
+  </Extension>
+</Bundle>

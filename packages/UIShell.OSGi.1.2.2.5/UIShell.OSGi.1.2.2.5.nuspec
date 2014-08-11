@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+  <metadata minClientVersion="1.2.2.5">
+    <id>UIShell.OSGi</id>
+    <version>1.2.2.5</version>
+    <title>UIShell.OSGi</title>
+    <authors>西安尤埃信息技术有限公司</authors>
+    <owners>西安尤埃信息技术有限公司</owners>
+    <projectUrl>http://www.iopenworks.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>OSGi.NET是OSGi R4.2规范移植到.NET平台的实现，是一个动态模块化框架的规范。OSGi.NET规范定义了面向组件、面向服务的编程方法。
+基于OSGi.NET的插件框架提供了模块化与插件化、面向服务架构和模块扩展三大功能，适用于控制台、WinForm、Windows服务、WPF、ASP.NET和移动平台等任意.NET应用环境。</description>
+    <summary>OSGi.NET尤埃开放服务平台</summary>
+  </metadata>
+</package>

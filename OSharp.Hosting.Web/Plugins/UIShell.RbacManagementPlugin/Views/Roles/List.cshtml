@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "角色管理";
+}
+
+@using UIShell.OSGi.MvcWebExtension
+@using UIShell.RbacPermissionService.Model
+@using UIShell.RbacManagementPlugin.ViewModels
+@model RoleListViewModel
+
+<!-- Page title -->
+<div class="page-title">
+    <h2><i class="icon-desktop color"></i> 角色管理 <small>角色与权限管理</small></h2>
+    <hr />
+</div>
+<!-- Page title -->
+
+<div class="awidget">
+    <div class="awidget-head">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="btn-group">
+                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">@("当前角色：" + Model.SelectedRole.Name) <span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                        @foreach (Role role in Model.Roles)
+                        {
+                            if (!role.Equals(Model.SelectedRole))
+                            {
+                                <li>@Html.ActionLink("角色：" + @role.Name, "List", new { guid = role.Id }) </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success pull-right" onclick="javascript: Save();">保存权限</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-danger pull-right" onclick="javascript: Delete('@Model.SelectedRole.Id');">删除角色</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary pull-right" onclick="javascript: Add();">新增角色</button>
+            </div>
+        </div>
+    </div>
+    <div class="awidget-body">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Save", "Roles", new { roleId = Model.SelectedRole.Id }, FormMethod.Post, null))
+                {
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2">应用名称</th>
+                                <th class="col-md-10">角色权限</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (string bundleSymbolicName in Model.BundleSymbolicNames)
+                            {
+                                <tr>
+                                    <td class="col-md-2">@Model.GetBundleName(bundleSymbolicName)</td>
+                                    <td class="col-md-10">
+                                        @foreach (RolePermissionViewModel role in Model.GetPermissions(bundleSymbolicName))
+                                        {
+                                            if (Model.SelectedRole.IsAdminRole())
+                                            {
+                                                @Html.CheckBox(role.KeyName, true, new { @disabled = "disabled" })
+                                            }
+                                            else if (role.Invoked)
+                                            {
+                                                @Html.CheckBox(role.KeyName, true, null)
+                                            }
+                                            else
+                                            {
+                                                @Html.CheckBox(role.KeyName, false, null)
+                                            }
+                                            <span>@role.PermissionName &nbsp;&nbsp;</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="@Url.BundleContent(BundleActivator.Bundle, "~/Scripts/crud.js")"></script>
+}
