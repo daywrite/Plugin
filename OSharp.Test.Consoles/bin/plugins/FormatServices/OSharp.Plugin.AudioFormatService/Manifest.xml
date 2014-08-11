@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="OSharp.Plugin.AudioFormatService" SymbolicName="OSharp.Plugin.AudioFormatService" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="OSharp.Plugin.AudioFormatService.Activator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\OSharp.Plugin.AudioFormatService.dll" Share="true" MultipleVersions="false" />
+  </Runtime>
+  <ExtensionPoint Point="OSharp.Plugin.AudioFormat" />
+</Bundle>

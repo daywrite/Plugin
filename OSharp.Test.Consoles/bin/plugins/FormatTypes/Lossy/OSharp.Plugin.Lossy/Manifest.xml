@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="OSharp.Plugin.Lossy" SymbolicName="OSharp.Plugin.Lossy" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="OSharp.Plugin.Lossy.Activator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\OSharp.Plugin.Lossy.dll" Share="false" MultipleVersions="false" />
+  </Runtime>
+  <Extension Point="OSharp.Plugin.AudioFormat">
+    <AudioFormat Type="APE" DecorderClass="OSharp.Plugin.Lossy.Decoder" />
+  </Extension>
+</Bundle>

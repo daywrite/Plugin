@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" Name="OSharp.Plugin.Calculator" SymbolicName="OSharp.Plugin.Calculator" Version="1.0.0.0" InitializedState="Active">
+  <Activator Type="OSharp.Plugin.Calculator.Activator" Policy="Immediate" />
+  <Runtime>
+    <Assembly Path="bin\OSharp.Plugin.Calculator.dll" Share="false" MultipleVersions="false" />
+  </Runtime>
+  <Services>
+    <Service Interface="OSharp.Plugin.Calculator.ICalculate" Type="OSharp.Plugin.Calculator.Impl.Calculator" />
+  </Services>
+</Bundle>
