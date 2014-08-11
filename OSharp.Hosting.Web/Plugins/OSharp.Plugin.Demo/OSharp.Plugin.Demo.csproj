@@ -41,6 +41,12 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -147,6 +153,28 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OSharp.Core.Data.Entity\OSharp.Core.Data.Entity.csproj">
+      <Project>{cebbce70-aff3-4fcb-b875-9f7a967e2aa6}</Project>
+      <Name>OSharp.Core.Data.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OSharp.Core\OSharp.Core.csproj">
+      <Project>{befd6d74-b010-4495-8b51-9fb503d0564a}</Project>
+      <Name>OSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OSharp.Plugin.Demo.Contracts\OSharp.Plugin.Demo.Contracts.csproj">
+      <Project>{a50179c9-83b6-4f0e-83ef-bd0ea9855720}</Project>
+      <Name>OSharp.Plugin.Demo.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OSharp.Plugin.Demo.Services\OSharp.Plugin.Demo.Services.csproj">
+      <Project>{2ec9fb73-6133-426e-9b17-a82fe5dfe9f9}</Project>
+      <Name>OSharp.Plugin.Demo.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OSharp.Utility\OSharp.Utility.csproj">
+      <Project>{63e43a57-c873-465a-8815-4a2a07e1dd53}</Project>
+      <Name>OSharp.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

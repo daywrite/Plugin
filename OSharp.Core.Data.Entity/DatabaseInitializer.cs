@@ -58,6 +58,8 @@ namespace OSharp.Core.Data.Entity
         private static ICollection<IEntityMapper> GetAllEntityMapper()
         {
             Type baseType = typeof(IEntityMapper);
+            //var assemblys = AppDomain.CurrentDomain.GetAssemblies().ToList();
+            //AddMapperAssembly(Assembly.GetExecutingAssembly());
             Type[] mapperTypes = MapperAssemblies.SelectMany(assembly => assembly.GetTypes())
                 .Where(type => baseType.IsAssignableFrom(type) && type != baseType && !type.IsAbstract).ToArray();
             ICollection<IEntityMapper> result = mapperTypes.Select(type => Activator.CreateInstance(type) as IEntityMapper).ToList();
